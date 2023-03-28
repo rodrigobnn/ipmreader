@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE isopackager SYSTEM "generic-subtag-packager.dtd">
+<isopackager>
+  <isofield
+      id="0"
+      length="4"
+      name="MESSAGE TYPE INDICATOR"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="1"
+      length="16"
+      name="BIT MAP"
+      class="org.jpos.iso.IFB_BITMAP"/>
+  <isofield
+      id="2"
+      length="16"
+      name="DE2 - PAN"
+      class="org.jpos.iso.IFE_LLNUM"/>
+  <isofield
+      id="3"
+      length="6"
+      name="DE3 - Processing Code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+<!--   <isofieldpackager -->
+<!--   	  id="3" -->
+<!--   	  length="6" -->
+<!--   	  name="Processing Code" -->
+<!--   	  class="org.jpos.iso.IFE_NUMERIC" -->
+<!--   	  firstField="1" -->
+<!--   	  emitBitmap="false" -->
+<!--   	  packager="org.jpos.iso.packager.GenericSubFieldPackager"> -->
+<!--   	  <isofield -->
+<!--           id="1" -->
+<!--           length="2" -->
+<!--           name="Cardholder Transaction Type" -->
+<!--           class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--       <isofield -->
+<!--           id="2" -->
+<!--           length="2" -->
+<!--           name="Cardholder “From” Account Type Code" -->
+<!--           class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--       <isofield -->
+<!--           id="3" -->
+<!--           length="2" -->
+<!--           name="Cardholder “To” Account Type Code" -->
+<!--           class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--   </isofieldpackager> -->
+  <isofield
+      id="4"
+      length="12"
+      pad="false"
+      name="DE4 - Transaction amount"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="5"
+      length="12"
+      pad="false"
+      name="DE5 - Reconciliation amount"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="6"
+      length="12"
+      pad="false"
+      name="DE6 - Cardholder billing amount"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="9"
+      length="8"
+      name="DE9 - Reconciliation conversion rate"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="10"
+      length="8"
+      name="DE10 - Cardholder billing conversion rate"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+   <isofieldpackager
+  	  id="12"
+  	  length="12"
+  	  name="DE12 - Date and time"
+  	  class="org.jpos.iso.IFB_BINARY"
+  	  firstField="1"
+  	  emitBitmap="false"
+  	  packager="org.jpos.iso.packager.GenericSubFieldPackager">
+  	  <isofield
+          id="1"
+          length="6"
+          name="Date"
+          class="org.jpos.iso.IFE_NUMERIC"/>
+      <isofield
+          id="2"
+          length="6"
+          name="Time"
+          class="org.jpos.iso.IFE_NUMERIC"/>
+  </isofieldpackager>
+  <isofield
+      id="14"
+      length="4"
+      name="DE14 - Expiration date"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+      
+  <isofield
+      id="22"
+      length="12"
+      name="DE22 - Point of service entry mode"
+      class="org.jpos.iso.IFE_CHAR"/>
+<!--    <isofieldpackager -->
+<!--   	  id="22" -->
+<!--   	  length="12" -->
+<!--   	  name="Point of service entry mode" -->
+<!--   	  class="org.jpos.iso.IFB_BINARY" -->
+<!--   	  firstField="1" -->
+<!--   	  emitBitmap="false" -->
+<!--   	  packager="org.jpos.iso.packager.GenericSubFieldPackager"> -->
+<!--   	<isofield -->
+<!--           id="1" -->
+<!--           length="1" -->
+<!--           name="Card Data Input Capability" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--     <isofield -->
+<!--           id="2" -->
+<!--           length="1" -->
+<!--           name="Cardholder authentication capability" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!-- 	<isofield -->
+<!--           id="3" -->
+<!--           length="1" -->
+<!--           name="Card capture capability" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--     <isofield -->
+<!--           id="4" -->
+<!--           length="1" -->
+<!--           name="Terminal Operating environment" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--     <isofield -->
+<!--           id="5" -->
+<!--           length="1" -->
+<!--           name="Cardholder present data" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--     <isofield -->
+<!--           id="6" -->
+<!--           length="1" -->
+<!--           name="Card present data" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--     <isofield -->
+<!--           id="7" -->
+<!--           length="1" -->
+<!--           name="Input mode" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--     <isofield -->
+<!--           id="8" -->
+<!--           length="1" -->
+<!--           name="Cardholder authentication method" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--      <isofield -->
+<!--           id="9" -->
+<!--           length="1" -->
+<!--           name="Authentication entity" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--      <isofield -->
+<!--           id="10" -->
+<!--           length="1" -->
+<!--           name="Card data outout capability" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--      <isofield -->
+<!--           id="11" -->
+<!--           length="1" -->
+<!--           name="Terminal data output capability" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--      <isofield -->
+<!--           id="12" -->
+<!--           length="1" -->
+<!--           name="Pin capture capability" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--   </isofieldpackager> -->
+  <isofield
+      id="23"
+      length="3"
+      name="DE23 - Card sequence number"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="24"
+      length="3"
+      name="DE24 - Function code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="25"
+      length="4"
+      name="DE25 - Message reason code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="26"
+      length="4"
+      name="DE26 - Card acceptor business code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+      
+      
+      <isofield
+      id="30"
+      length="24"
+      name="DE30 - Original amounts"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+      
+      
+      
+  <isofieldpackager
+  	  id="30"
+  	  length="24"
+  	  name="DE30 - Original amounts"
+  	  class="org.jpos.iso.IFE_NUMERIC"
+  	  firstField="1"
+  	  emitBitmap="false"
+  	  packager="org.jpos.iso.packager.GenericSubFieldPackager">
+  	  <isofield
+          id="1"
+          length="12"
+          name="Original transaction amount"
+          class="org.jpos.iso.IF_CHAR"/>
+      <isofield
+          id="2"
+          length="12"
+          name="Original reconciliation amount"
+          class="org.jpos.iso.IF_CHAR"/>
+  </isofieldpackager>
+  <isofield
+          id="31"
+          length="23"
+          name="DE31 - Acquirer reference data"
+          class="org.jpos.iso.IFE_LLCHAR"/>
+<!--   <isofieldpackager -->
+<!--       id="31" -->
+<!--       length="23" -->
+<!--       name="Acquirer reference data" -->
+<!--       class="org.jpos.iso.IFE_LLCHAR" -->
+<!--       firstField="1" -->
+<!--   	  emitBitmap="false" -->
+<!--   	  packager="org.jpos.iso.packager.GenericSubFieldPackager"> -->
+<!--        <isofield -->
+<!--           id="1" -->
+<!--           length="1" -->
+<!--           name="Filler" -->
+<!--           class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--        <isofield -->
+<!-- 	      id="2" -->
+<!-- 	      length="6" -->
+<!-- 	      name="Acquirer's BIN" -->
+<!-- 	      class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--        <isofield -->
+<!-- 	      id="3" -->
+<!-- 	      length="4" -->
+<!-- 	      name="Julian Processing Date YDDD" -->
+<!-- 	      class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--        <isofield -->
+<!-- 	      id="4" -->
+<!-- 	      length="11" -->
+<!-- 	      name="Acquirer's Sequence Number" -->
+<!-- 	      class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--        <isofield -->
+<!-- 	      id="5" -->
+<!-- 	      length="1" -->
+<!-- 	      name="Check Digit" -->
+<!-- 	      class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--   </isofieldpackager>    -->
+  <isofield
+      id="32"
+      length="11"
+      name="DE32 - Acquiring institution code"
+      class="org.jpos.iso.IFE_LLNUM"/>
+  <isofield
+      id="33"
+      length="11"
+      name="DE33 - Forwarding institution code"
+      class="org.jpos.iso.IFE_LLNUM"/>
+  <isofield
+      id="37"
+      length="12"
+      name="DE37 - Retrieval reference number"
+      class="org.jpos.iso.IFE_CHAR"/>
+  <isofield
+      id="38"
+      length="6"
+      pad="true"
+      name="DE38 - Approval code"
+      class="org.jpos.iso.IFE_CHAR"/>
+  <isofield
+      id="40"
+      length="3"
+      name="DE40 - Service code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="41"
+      length="8"
+      name="DE41 - Card acceptor terminal ID"
+      class="org.jpos.iso.IFE_CHAR"/>
+  <isofield
+      id="42"
+      length="15"
+      name="DE42 - Card acceptor ID code"
+      class="org.jpos.iso.IFE_CHAR"/>
+<!--   <isofieldpackager -->
+<!--       id="43" -->
+<!--       length="99" -->
+<!--       pad="true" -->
+<!--       name="Card acceptor name and location" -->
+<!--       class="org.jpos.iso.IFE_LLCHAR" -->
+<!--       firstField="1" -->
+<!--   	  emitBitmap="false" -->
+<!--   	  packager="org.jpos.iso.packager.GenericSubFieldPackager"> -->
+<!--        <isofield -->
+<!--           id="1" -->
+<!--           length="22" -->
+<!--           name="Card Acceptor Name" -->
+<!--           class="org.jpos.iso.IFE_LLCHAR"/> -->
+<!--        <isofield -->
+<!-- 	      id="2" -->
+<!-- 	      length="48" -->
+<!-- 	      name="Card Acceptor Street Address" -->
+<!-- 	      class="org.jpos.iso.IFE_LLCHAR"/> -->
+<!--        <isofield -->
+<!-- 	      id="3" -->
+<!-- 	      length="13" -->
+<!-- 	      name="Card Acceptor City" -->
+<!-- 	      class="org.jpos.iso.IFE_LLCHAR"/> -->
+<!--        <isofield -->
+<!-- 	      id="4" -->
+<!-- 	      length="10" -->
+<!-- 	      name="Postal Code" -->
+<!-- 	      class="org.jpos.iso.IFE_LLCHAR"/> -->
+<!--        <isofield -->
+<!-- 	      id="5" -->
+<!-- 	      length="3" -->
+<!-- 	      name="State, Province Or Region Code" -->
+<!-- 	      class="org.jpos.iso.IFE_LLCHAR"/> -->
+<!-- 	   <isofield -->
+<!-- 	      id="6" -->
+<!-- 	      length="3" -->
+<!-- 	      name="Country Code" -->
+<!-- 	      class="org.jpos.iso.IFE_LLCHAR"/>    -->
+<!--   </isofieldpackager> -->
+<isofield
+      id="43"
+      length="99"
+      pad="true"
+      name="DE43 - Card acceptor name and location"
+      class="org.jpos.iso.IFE_LLCHAR"/>
+  <isofieldpackager
+	  id="48"
+	  length="999"
+	  name="DE48 - Additional Data"
+	  emitBitmap="false"
+	  class="org.jpos.iso.IFE_LLLCHAR"
+	  tagMapper="br.com.b2.clearing.dataTypes.TTTTDecimalTagMapper"
+	  packager="br.com.b2.clearing.controllers.B2GenericTaggedFieldsPackager">
+
+	  <isofield
+	  	id="2"
+	  	length="3"
+	  	name="PDS0002 - GCMS Product Idenitifier"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="3"
+	  	length="3"
+	  	name="PDS0003 - Licensed product identifier"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="15"
+	  	length="7"
+	  	name="PDS0015 - Clearing Currency Conversion Identifier"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="23"
+	  	length="21"
+	  	name="PDS0023 - Terminal Type"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="27"
+	  	length="3"
+	  	name="PDS0027 - XXXXX"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="43"
+	  	length="3"
+	  	name="PDS0023 - Transaction Type Identifier"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="52"
+	  	length="3"
+	  	name="PDS0052 - Electronic Commerce Security Level Indicator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="105"
+	  	length="25"
+	  	name="PDS0105 - File ID"
+	  	class="br.com.b2.clearing.dataTypes.IFE_TTTTLLLNUM"/>
+	  <isofield
+	  	id="122"
+	  	length="1"
+	  	name="PDS0122 - Processing mode"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="146"
+	  	length="432"
+	  	name="PDS0146 - Transaction fee amounts"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="148"
+	  	length="60"
+	  	name="PDS0148 - Currency exponents"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="149"
+	  	length="6"
+	  	name="PDS0149 - Currency Codes, Amounts, Origina"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
+	  	id="158"
+	  	length="31"
+	  	name="PDS0158 - Business activity"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="159"
+	  	length="67"
+	  	name="PDS0159 - Settlement data"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="165"
+	  	length="30"
+	  	name="PDS0165 - Settlement indicator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="170"
+	  	length="57"
+	  	name="PDS0170 - Card Acceptor Inquiry Information"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="177"
+	  	length="2"
+	  	name="PDS0177 - Cross-border"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	<isofield
+	  	id="183"
+	  	length="39"
+	  	name="PDS0183 - Brazil Post-Dated Transaction Data "
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="188"
+	  	length="120"
+	  	name="PDS0188 - Proprietary Service Data"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="189"
+	  	length="41"
+	  	name="PDS0189 - Point-of-Interaction (POI) Phone Data"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="191"
+	  	length="1"
+	  	name="PDS0191 - Originating Message Format"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	<isofield
+	  	id="262"
+	  	length="1"
+	  	name="PDS0262 - Documentation Indicator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="300"
+	  	length="25"
+	  	name="PDS0300 - Reconciled, File"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="301"
+	  	length="16"
+	  	name="PDS0301 - File Amount, Checksum"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="306"
+	  	length="8"
+	  	name="PDS0306 - File Message Counts"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="359"
+	  	length="67"
+	  	name="PDS0359 - Reconciled, Settlement Activity"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="372"
+	  	length="7"
+	  	name="PDS0372 - Reconciled, Transaction Function"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="374"
+	  	length="2"
+	  	name="PDS0374 - Reconciled, Processing Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="378"
+	  	length="1"
+	  	name="PDS0378 - Original/Reversal Totals Indicator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="380"
+	  	length="17"
+	  	name="PDS0380 - Debits, Transaction Amount In Transaction Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="381"
+	  	length="17"
+	  	name="PDS0381 - Credits, Transaction Amount in Transaction Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="384"
+	  	length="17"
+	  	name="PDS0384 - Amount, Net Transaction in Transaction Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="390"
+	  	length="17"
+	  	name="PDS0390 - Debits, Transaction Amount in Reconciliation Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="391"
+	  	length="17"
+	  	name="PDS0391 - Credits, Transaction Amount in Reconciliation Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="392"
+	  	length="216"
+	  	name="PDS0392 - Debits, Fee Amounts in Reconciliation Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="393"
+	  	length="216"
+	  	name="PDS0396 - Credits, Fee Amounts in Reconciliation Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="394"
+	  	length="17"
+	  	name="PDS0394 - Amount, Net Transaction in Reconciliation Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="395"
+	  	length="16"
+	  	name="PDS0395 - Amount, Net Fee in Reconciliation Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="396"
+	  	length="17"
+	  	name="PDS0396 - Amount, Net Total in Reconciliation Currency"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="400"
+	  	length="10"
+	  	name="PDS0400 - Debits, Transaction Number"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="401"
+	  	length="10"
+	  	name="PDS0401 - Credits, Transaction Number"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  	<isofield
+	  	id="402"
+	  	length="10"
+	  	name="PDS0402 - Total, Transaction Number"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="1000"
+	  	length="992"
+	  	name="PDS1000 - Member-to-Member Proprietary Data"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+  </isofieldpackager>
+  <isofield
+      id="49"
+      length="3"
+      name="DE49 - Transaction currency code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="50"
+      length="3"
+      name="DE50 - Reconciliation currency code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="51"
+      length="3"
+      name="DE51 - Cardholder billing currency code"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+<!--   <isofieldpackager -->
+<!--       id="54" -->
+<!--       length="240" -->
+<!--       name="Additional amounts" -->
+<!--       class="org.jpos.iso.IFE_LLLCHAR" -->
+<!--       firstField="1" -->
+<!--   	  emitBitmap="false" -->
+<!--   	  packager="org.jpos.iso.packager.GenericSubFieldPackager"> -->
+<!--   	  <isofield -->
+<!--           id="1" -->
+<!--           length="2" -->
+<!--           name="Additional Amount, Account Type" -->
+<!--           class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--        <isofield -->
+<!-- 	      id="2" -->
+<!-- 	      length="2" -->
+<!-- 	      name="Additional Amount, Account Type" -->
+<!-- 	      class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--        <isofield -->
+<!-- 	      id="3" -->
+<!-- 	      length="3" -->
+<!-- 	      name="Additional Amount, Currency Code" -->
+<!-- 	      class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--        <isofield -->
+<!-- 	      id="4" -->
+<!-- 	      length="1" -->
+<!-- 	      name="Additional Amount, Amount Sign" -->
+<!-- 	      class="org.jpos.iso.IFE_CHAR"/> -->
+<!--        <isofield -->
+<!-- 	      id="5" -->
+<!-- 	      length="12" -->
+<!-- 	      name="Additional Amount, Amount" -->
+<!-- 	      class="org.jpos.iso.IFE_NUMERIC"/> -->
+<!--   </isofieldpackager> -->
+  <isofield
+      id="54"
+      length="240"
+      name="DE54 - Additional amounts"
+      class="org.jpos.iso.IFA_LLLNUM"/>
+  <isofield
+      id="55"
+      length="255"
+      name="DE55 - ICC system-related data"
+      class="org.jpos.iso.IFE_LLLBINARY"/>
+  <isofield
+      id="62"
+      length="999"
+      name="DE62 - Additional data 2"
+      class="org.jpos.iso.IFE_LLLCHAR"/>
+<!--   <isofieldpackager -->
+<!--       id="63" -->
+<!--       length="16" -->
+<!--       name="Transaction lifecycle ID" -->
+<!--       class="org.jpos.iso.IFE_LLCHAR" -->
+<!--   	  emitBitmap="false" -->
+<!--   	  packager="org.jpos.iso.packager.GenericSubFieldPackager"> -->
+<!--       <isofield -->
+<!--           id="1" -->
+<!--           length="1" -->
+<!--           pad="false" -->
+<!--           name="Life Cycle Support Indicator" -->
+<!--           class="org.jpos.iso.IFE_CHAR"/> -->
+<!--        <isofield -->
+<!-- 	      id="2" -->
+<!-- 	      length="15" -->
+<!-- 	      pad="true" -->
+<!-- 	      name="Trace ID" -->
+<!-- 	      class="org.jpos.iso.IFE_LLCHAR"/> -->
+<!--   </isofieldpackager> -->
+<isofield
+      id="63"
+      length="16"
+      pad="true"
+      name="DE63 - Transaction lifecycle ID"
+      class="org.jpos.iso.IFE_LLLCHAR"/>
+  <isofield
+      id="71"
+      length="8"
+      name="DE71 - Message Number"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+  <isofield
+      id="72"
+      length="999"
+      name="DE72 - Data record"
+      pad="true"
+      class="org.jpos.iso.IFE_LLLCHAR"/>
+  <isofield
+      id="73"
+      length="6"
+      name="DE73 - Action Date"
+      class="org.jpos.iso.IFE_NUMERIC"/>
+   <isofield
+      id="93"
+      length="11"
+      name="DE93 - Transaction destination institution ID code"
+      class="org.jpos.iso.IFE_LLCHAR"/>
+   <isofield
+      id="94"
+      length="11"
+      name="DE94 - Transaction originator institution ID code"
+      class="org.jpos.iso.IFE_LLCHAR"/>
+   <isofield
+      id="95"
+      length="10"
+      name="DE95 - Transaction originator institution ID code"
+      class="org.jpos.iso.IFE_LLCHAR"/>
+   <isofield
+      id="100"
+      length="11"
+      name="DE100 - Receiving institution ID code"
+      class="org.jpos.iso.IFE_LLCHAR"/>
+      
+   <isofield
+      id="111"
+      length="12"
+      name="DE111 - Currency conversion assessment amount"
+      class="org.jpos.iso.IFA_LLLNUM"/>
+  <isofield
+      id="123"
+      length="999"
+      pad="true"
+      name="DE123 - Additional Data 3"
+      class="org.jpos.iso.IFE_LLLCHAR"/>
+  <isofield
+      id="124"
+      length="999"
+      pad="true"
+      name="DE124 - Additional Data 4"
+      class="org.jpos.iso.IFE_LLLCHAR"/>
+  <isofield
+      id="125"
+      length="999"
+      pad="true"
+      name="DE125 - Additional Data 5"
+      class="org.jpos.iso.IFE_LLLCHAR"/>
+  <isofield
+      id="127"
+      length="999"
+      pad="true"
+      name="DE127 - Network Data"
+      class="org.jpos.iso.IFE_LLLCHAR"/>
+
+</isopackager>
