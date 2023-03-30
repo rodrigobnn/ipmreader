@@ -81,12 +81,12 @@
   	  firstField="1"
   	  emitBitmap="false"
   	  packager="org.jpos.iso.packager.GenericSubFieldPackager">
-  	  <isofield
+  	<isofield
           id="1"
           length="6"
           name="Date"
           class="org.jpos.iso.IFE_NUMERIC"/>
-      <isofield
+    <isofield
           id="2"
           length="6"
           name="Time"
@@ -194,7 +194,7 @@
       class="org.jpos.iso.IFE_NUMERIC"/>
       
       
-      <isofield
+   <isofield
       id="30"
       length="24"
       name="DE30 - Original amounts"
@@ -336,7 +336,7 @@
 <!-- 	      name="Country Code" -->
 <!-- 	      class="org.jpos.iso.IFE_LLCHAR"/>    -->
 <!--   </isofieldpackager> -->
-<isofield
+  <isofield
       id="43"
       length="99"
       pad="true"
@@ -351,6 +351,11 @@
 	  tagMapper="br.com.b2.clearing.dataTypes.TTTTDecimalTagMapper"
 	  packager="br.com.b2.clearing.controllers.B2GenericTaggedFieldsPackager">
 
+	  <isofield
+	  	id="1"
+	  	length="21"
+	  	name="PDS0001 - Mapping Primary Account Number"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
 	  	id="2"
 	  	length="3"
@@ -382,6 +387,21 @@
 	  	name="PDS0023 - Transaction Type Identifier"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
+	  	id="44"
+	  	length="20"
+	  	name="PDS0044 - Program Participation Indicator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="58"
+	  	length="2"
+	  	name="PDS0058 - XXXXXXX"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="59"
+	  	length="11"
+	  	name="PDS0059 - XXXXXXX"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
 	  	id="52"
 	  	length="3"
 	  	name="PDS0052 - Electronic Commerce Security Level Indicator"
@@ -390,7 +410,7 @@
 	  	id="105"
 	  	length="25"
 	  	name="PDS0105 - File ID"
-	  	class="br.com.b2.clearing.dataTypes.IFE_TTTTLLLNUM"/>
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
 	  	id="122"
 	  	length="1"
@@ -426,7 +446,7 @@
 	  	length="30"
 	  	name="PDS0165 - Settlement indicator"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="170"
 	  	length="57"
 	  	name="PDS0170 - Card Acceptor Inquiry Information"
@@ -436,7 +456,7 @@
 	  	length="2"
 	  	name="PDS0177 - Cross-border"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	<isofield
+	  <isofield
 	  	id="183"
 	  	length="39"
 	  	name="PDS0183 - Brazil Post-Dated Transaction Data "
@@ -446,7 +466,7 @@
 	  	length="120"
 	  	name="PDS0188 - Proprietary Service Data"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="189"
 	  	length="41"
 	  	name="PDS0189 - Point-of-Interaction (POI) Phone Data"
@@ -456,110 +476,130 @@
 	  	length="1"
 	  	name="PDS0191 - Originating Message Format"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	<isofield
+	  <isofield
+	  	id="207"
+	  	length="3"
+	  	name="PDS0207 - Wallet Identifier"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="208"
+	  	length="26"
+	  	name="PDS0208 - Additional Merchant Data"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
 	  	id="262"
 	  	length="1"
 	  	name="PDS0262 - Documentation Indicator"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="300"
 	  	length="25"
 	  	name="PDS0300 - Reconciled, File"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="301"
 	  	length="16"
 	  	name="PDS0301 - File Amount, Checksum"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="306"
 	  	length="8"
 	  	name="PDS0306 - File Message Counts"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="359"
 	  	length="67"
 	  	name="PDS0359 - Reconciled, Settlement Activity"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="372"
 	  	length="7"
 	  	name="PDS0372 - Reconciled, Transaction Function"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="374"
 	  	length="2"
 	  	name="PDS0374 - Reconciled, Processing Code"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="378"
 	  	length="1"
 	  	name="PDS0378 - Original/Reversal Totals Indicator"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="380"
 	  	length="17"
 	  	name="PDS0380 - Debits, Transaction Amount In Transaction Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="381"
 	  	length="17"
 	  	name="PDS0381 - Credits, Transaction Amount in Transaction Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="384"
 	  	length="17"
 	  	name="PDS0384 - Amount, Net Transaction in Transaction Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="390"
 	  	length="17"
 	  	name="PDS0390 - Debits, Transaction Amount in Reconciliation Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="391"
 	  	length="17"
 	  	name="PDS0391 - Credits, Transaction Amount in Reconciliation Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="392"
 	  	length="216"
 	  	name="PDS0392 - Debits, Fee Amounts in Reconciliation Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="393"
 	  	length="216"
 	  	name="PDS0396 - Credits, Fee Amounts in Reconciliation Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="394"
 	  	length="17"
 	  	name="PDS0394 - Amount, Net Transaction in Reconciliation Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="395"
 	  	length="16"
 	  	name="PDS0395 - Amount, Net Fee in Reconciliation Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="396"
 	  	length="17"
 	  	name="PDS0396 - Amount, Net Total in Reconciliation Currency"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="400"
 	  	length="10"
 	  	name="PDS0400 - Debits, Transaction Number"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="401"
 	  	length="10"
 	  	name="PDS0401 - Credits, Transaction Number"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
 	  	id="402"
 	  	length="10"
 	  	name="PDS0402 - Total, Transaction Number"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="501"
+	  	length="16"
+	  	name="PDS0501 - Transaction Description"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="663"
+	  	length="992"
+	  	name="PDS0663 - Free-Form Description"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
 	  	id="1000"
@@ -651,7 +691,7 @@
 <!-- 	      name="Trace ID" -->
 <!-- 	      class="org.jpos.iso.IFE_LLCHAR"/> -->
 <!--   </isofieldpackager> -->
-<isofield
+  <isofield
       id="63"
       length="16"
       pad="true"
@@ -725,3 +765,4 @@
       class="org.jpos.iso.IFE_LLLCHAR"/>
 
 </isopackager>
+

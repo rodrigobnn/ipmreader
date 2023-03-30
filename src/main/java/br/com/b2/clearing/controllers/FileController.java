@@ -6,7 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.jpos.iso.ISOBasePackager;
 import org.jpos.iso.ISOException;
@@ -20,55 +24,66 @@ import com.google.gson.JsonObject;
 
 public class FileController {
 	public static void main(String[] args) throws IOException, ISOException {
-		RandomAccessFile file = new RandomAccessFile("files/08_TransacaoQuasiCashAvista.ipm", "r");
-		B2GenericPackager packager = new B2GenericPackager("files/ISO8583_format.xml");
-		packager.setHeaderLength(4);
-		ISOMsg msg;
-		
-		int fileSize = (int) file.length();
 
-		int numOfReadBytes = 0;
-		int totalRemovido = 0;
-		
-		byte[] byteArray = new byte[fileSize];
+		Set<String> arquivos = new HashSet<>();
+		arquivos.add("Pagamento Nacional.ipm");
 
-		Path path = Paths.get("files/resultado" + System.currentTimeMillis() + ".json");
-		JsonArray json = new JsonArray();
+//		try (Stream<Path> stream = Files.list(Paths.get("files"))) {
+//			arquivos = stream.filter(file -> !Files.isDirectory(file) && file.getFileName().toString().endsWith("ipm")).map(Path::getFileName).map(Path::toString)
+//					.collect(Collectors.toSet());
+//		}
 
-		while (numOfReadBytes < fileSize) {
-
-			System.out.println("File size:" + fileSize + ", read:" + numOfReadBytes);
-			msg = new ISOMsg();
-
-			msg.setPackager(packager);
-
-			file.seek(numOfReadBytes+totalRemovido);
-
-			file.read(byteArray);
-
-			int tamanho = msg.unpack(byteArray);
-			totalRemovido += tamanho;
-
-			logISOMsg(msg);
-
-			JsonObject mensagem = createIsoJson(msg);
-			json.add(mensagem);
-
-			numOfReadBytes += msg.pack().length;
+		for (String arquivo : arquivos) {
 			
-			System.out.println(tamanho+" - "+numOfReadBytes);
+			System.out.println("ARQUIVO PROCESSANDO - INÍCIO : "+arquivo);
 			
-			if(tamanho == 2147483647) {
-				break;
+			RandomAccessFile file = new RandomAccessFile("files/"+arquivo, "r");
+			B2GenericPackager packager = new B2GenericPackager("files/ISO8583_format.xml");
+			packager.setHeaderLength(4);
+			ISOMsg msg;
+
+			int fileSize = (int) file.length();
+
+			int numOfReadBytes = 0;
+			int totalRemovido = 0;
+
+			byte[] byteArray = new byte[fileSize];
+
+			Path path = Paths.get("files/resultado" + System.currentTimeMillis() + ".json");
+			JsonArray json = new JsonArray();
+
+			while (numOfReadBytes < fileSize) {
+
+				//System.out.println("File size:" + fileSize + ", read:" + numOfReadBytes);
+				msg = new ISOMsg();
+
+				msg.setPackager(packager);
+
+				file.seek(numOfReadBytes + totalRemovido);
+
+				file.read(byteArray);
+
+				int tamanho = msg.unpack(byteArray);
+				totalRemovido += tamanho;
+
+				logISOMsg(msg);
+
+				JsonObject mensagem = createIsoJson(msg);
+				json.add(mensagem);
+
+				numOfReadBytes += msg.pack().length;
+
+				if (tamanho == 2147483647) {
+					break;
+				}
+
 			}
-			
-			
-			
 
+			Files.write(path, json.toString().getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+			file.close();
+			
+			System.out.println("ARQUIVO PROCESSANDO - FIM : "+arquivo);
 		}
-		
-		Files.write(path, json.toString().getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-		file.close();
 
 	}
 
