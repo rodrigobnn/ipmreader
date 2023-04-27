@@ -27,7 +27,7 @@ public class FileController {
 	public static void main(String[] args) throws IOException, ISOException {
 
 		Set<String> arquivos = new HashSet<>();
-//		arquivos.add("01-TransacaoDeCompraNacional(Chip).ipm");
+		//arquivos.add("Pagamento Nacional.ipm");
 
 		try (Stream<Path> stream = Files.list(Paths.get("files"))) {
 			arquivos = stream.filter(file -> !Files.isDirectory(file) && file.getFileName().toString().endsWith("ipm")).map(Path::getFileName).map(Path::toString)
@@ -36,7 +36,7 @@ public class FileController {
 
 		for (String arquivo : arquivos) {
 			
-		//	System.out.println("ARQUIVO PROCESSANDO - INÍCIO : "+arquivo);
+			System.out.println("ARQUIVO PROCESSANDO - INÍCIO : "+arquivo);
 			
 			RandomAccessFile file = new RandomAccessFile("files/"+arquivo, "r");
 			B2GenericPackager packager = new B2GenericPackager("files/ISO8583_format.xml");
@@ -50,7 +50,7 @@ public class FileController {
 
 			byte[] byteArray = new byte[fileSize];
 
-			Path path = Paths.get("files/resultado_" + arquivo.split(".ipm")[0] + "_" + System.currentTimeMillis() + ".json");
+			Path path = Paths.get("files/json/resultado_" + arquivo.split(".ipm")[0] + "_" + System.currentTimeMillis() + ".json");
 			JsonArray json = new JsonArray();
 			
 			
@@ -93,6 +93,7 @@ public class FileController {
 			file.close();
 			
 			System.out.println("ARQUIVO PROCESSANDO - FIM : "+arquivo);
+			System.out.println();
 		}
 	}
 
@@ -152,7 +153,6 @@ public class FileController {
 				JsonObject deItem = new JsonObject();
 				if (msg.hasField(i)) {
 					if (msg.getComponent(i).getChildren().size() > 0) {
-						System.out.println();
 						JsonArray array = new JsonArray();
 						Map<Integer, ISOField> children = msg.getComponent(i).getChildren();
 						for (Integer j : children.keySet()) {
