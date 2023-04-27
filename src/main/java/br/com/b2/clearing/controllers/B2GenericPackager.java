@@ -1,24 +1,21 @@
 package br.com.b2.clearing.controllers;
 
-import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 import java.util.BitSet;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.jpos.iso.EbcdicPrefixer;
-import org.jpos.iso.ISOBinaryField;
 import org.jpos.iso.ISOBitMap;
 import org.jpos.iso.ISOBitMapPackager;
 import org.jpos.iso.ISOComponent;
 import org.jpos.iso.ISOException;
 import org.jpos.iso.ISOFieldPackager;
 import org.jpos.iso.ISOMsg;
-import org.jpos.iso.ISOMsgFieldPackager;
-import org.jpos.iso.ISOPackager;
-import org.jpos.iso.ISOStringFieldPackager;
-import org.jpos.iso.ISOSubFieldPackager;
 import org.jpos.iso.ISOUtil;
-import org.jpos.iso.NullPrefixer;
-import org.jpos.iso.Prefixer;
+import org.jpos.iso.LiteralBinaryInterpreter;
 import org.jpos.iso.packager.GenericPackager;
+import org.jpos.tlv.TLVList;
+import org.jpos.tlv.TLVMsg;
 import org.jpos.util.LogEvent;
 import org.jpos.util.Logger;
 
@@ -74,13 +71,7 @@ public class B2GenericPackager extends GenericPackager {
 				try {
 					if (bmap == null && fld[i] == null)
 						continue;
-
-					// maxField is computed above as min(fld.length-1, bmap.length()-1), therefore
-					// "maxField > 128" means fld[] has packagers defined above 128, *and*
-					// the bitmap's length is greater than 128 (i.e., a contiguous tertiary bitmap
-					// exists).
-					// In this case, bit 65 simply indicates a 3rd bitmap contiguous to the 2nd one.
-					// Therefore, there MUST NOT be a DE-65 with data payload to read.
+					
 					if (maxField > 128 && i == 65)
 						continue; // ignore extended bitmap
 
@@ -88,188 +79,59 @@ public class B2GenericPackager extends GenericPackager {
 						if (fld[i] == null)
 							throw new ISOException("field packager '" + i + "' is null");
 
-						if (fld[i] instanceof ISOMsgFieldPackager) {
-							ISOPackager msgPackager = ((ISOMsgFieldPackager) fld[i]).getISOMsgPackager();
-
-							ISOBinaryField f = new ISOBinaryField(0);
-							if (msgPackager instanceof ISOSubFieldPackager) {
-								EbcdicPrefixer prefixer = EbcdicPrefixer.LLL;
-
-								int len = prefixer.decodeLength(b, consumed);
-								int lenLen = prefixer.getPackedLength();
-
-								ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-								int removidos = 0;
-
-								for (int x = 0; x < b.length; x++) {
-									if (x < consumed + lenLen) {
-										baos.write(b[x]);
-									} else if (x >= consumed + len + removidos + lenLen) {
-										baos.write(b[x]);
-									} else if (b[x] == 0) {
-										removidos++;
-										removidosTotal++;
-									} else {
-										baos.write(b[x]);
-									}
-								}
-
-								byte[] newB = baos.toByteArray();
-								b = newB;
-
-							}
-						} else if (fld[i] instanceof ISOStringFieldPackager) {
-
-							String en = fld[i].getClass().getName().replace("org.jpos.iso.", "");
-
-							Prefixer prefixer = null;
-
-							switch (en) {
-							case "IFE_NUMERIC":
-								prefixer = NullPrefixer.INSTANCE;
-								break;
-							case "IFE_LLNUM":
-								prefixer = EbcdicPrefixer.LL;
-								break;
-							case "IFA_LLLNUM":
-								prefixer = EbcdicPrefixer.LLL;
-								break;
-							case "IFB_BINARY":
-								prefixer = NullPrefixer.INSTANCE;
-								break;
-							case "IFE_CHAR":
-								prefixer = NullPrefixer.INSTANCE;
-								break;
-							case "IFE_LLCHAR":
-								prefixer = EbcdicPrefixer.LL;
-								break;
-							case "IFE_LLLCHAR":
-								prefixer = EbcdicPrefixer.LLL;
-								break;
-							case "IFE_LLLBINARY":
-								prefixer = EbcdicPrefixer.LLL;
-								break;
-							}
-
-							int len = prefixer.decodeLength(b, consumed);
-							if (len == -1) {
-				                // The prefixer doesn't know how long the field is, so use
-				                // maxLength instead
-				                len = fld[i].getLength();
-				            }
+						if (i == 55) { // DE55
 							
-							int lenLen = prefixer.getPackedLength();
+							int len = EbcdicPrefixer.LLL.decodeLength(b, consumed);
+							int lenLen = EbcdicPrefixer.LLL.getPackedLength();
+							byte[] unpacked = LiteralBinaryInterpreter.INSTANCE.uninterpret(b, consumed+lenLen, len );
+							
+							TLVList tlv = new TLVList();
+							
+							tlv.unpack(unpacked);
+							
+							B2IsoMsg c = new B2IsoMsg();
+							Map<String, String> campos = new HashMap<String, String>();
+							
+							B2GenericPackager packager = new B2GenericPackager("files/ISO8583_format.xml");
+							
+							String fieldsDescription = ((GenericPackager) packager).getFieldPackager(i).getDescription();
+							
+							c.setB2FieldDescription(fieldsDescription);
+							c.setFieldNumber(i);
+							c.setValue(Arrays.copyOfRange(b, consumed+lenLen, consumed+lenLen+len));
+							c.setBytes(Arrays.copyOfRange(b, consumed+lenLen, consumed+lenLen+len));
+						
+							for (TLVMsg msg : tlv.getTags()) {
+								campos.put(Integer.toHexString(msg.getTag()), ISOUtil.hexString(msg.getValue()));
+							}
+							
+							c.setB2Campos(campos);
+							
+							consumed+=len;
+							consumed+=lenLen;
+							
+							m.set(c);
+							
+						} else {
+							ISOComponent c = fld[i].createComponent(i);
+							consumed += fld[i].unpack(c, b, consumed);
+							
+							if (evt != null)
+								fieldUnpackLogger(evt, i, c, fld);
+							m.set(c);
 
-							ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-							int removidos = 0;
-
-							for (int x = 0; x < b.length; x++) {
-								if (x < consumed + lenLen) {
-									baos.write(b[x]);
-								} else if (x >= consumed + len + removidos + lenLen) {
-									baos.write(b[x]);
-								} else if (b[x] == 0) {
-									removidos++;
-									removidosTotal++;
-								} else {
-									baos.write(b[x]);
-								}
+							if (i == thirdBitmapField && fld.length > 129 && // fld[128] is at pos 129
+									bmapBytes == 16 && fld[thirdBitmapField] instanceof ISOBitMapPackager) {
+																												
+								BitSet bs3rd = (BitSet) ((ISOComponent) m.getChildren().get(thirdBitmapField)).getValue();
+								maxField = 128 + (bs3rd.length() - 1); // update loop end condition
+								for (int bit = 1; bit <= 64; bit++)
+									bmap.set(bit + 128, bs3rd.get(bit)); // extend bmap with new bits above 128
 							}
 
-							byte[] newB = baos.toByteArray();
-							b = newB;
-						}
-
-						ISOComponent c = fld[i].createComponent(i);
-						consumed += fld[i].unpack(c, b, consumed);
-
-						if (evt != null)
-							fieldUnpackLogger(evt, i, c, fld);
-						m.set(c);
-
-						if (i == thirdBitmapField && fld.length > 129 && // fld[128] is at pos 129
-								bmapBytes == 16 && fld[thirdBitmapField] instanceof ISOBitMapPackager) { // We have a
-																											// weird
-																											// case of
-																											// tertiary
-																											// bitmap
-																											// implemented
-																											// inside a
-																											// Data
-																											// Element
-																											// instead
-																											// of being
-																											// contiguous
-																											// to the
-																											// primary
-																											// and
-																											// secondary
-																											// bitmaps.
-																											// If enter
-																											// this "if"
-																											// it's
-																											// because
-																											// we have a
-																											// proper
-																											// 16-byte
-																											// bitmap
-																											// (1st &
-																											// 2nd),
-																											// but are
-																											// expecting
-																											// more than
-																											// 128 Data
-																											// Elements
-																											// according
-																											// to fld[].
-																											// Normally,
-																											// these
-																											// kind of
-																											// ISO8583
-																											// implementations
-																											// have the
-																											// tertiary
-																											// bitmap in
-																											// DE-65,
-																											// but
-																											// sometimes
-																											// they
-																											// specify
-																											// some
-																											// other DE
-																											// (given by
-																											// thirdBitmapField).
-																											// We also
-																											// double
-																											// check
-																											// that the
-																											// DE has
-																											// been
-																											// specified
-																											// as an
-																											// ISOBitMapPackager
-																											// in fld[].
-																											// By now,
-																											// the
-																											// tertiary
-																											// bitmap
-																											// has
-																											// already
-																											// been
-																											// unpacked
-																											// into
-																											// field
-																											// `thirdBitmapField`.
-							BitSet bs3rd = (BitSet) ((ISOComponent) m.getChildren().get(thirdBitmapField)).getValue();
-							maxField = 128 + (bs3rd.length() - 1); // update loop end condition
-							for (int bit = 1; bit <= 64; bit++)
-								bmap.set(bit + 128, bs3rd.get(bit)); // extend bmap with new bits above 128
-						}
-
-						if (i == 24 && c.getValue().toString().equals("695")) {
-							endOfFile = true;
+							if (i == 24 && c.getValue().toString().equals("695")) {
+								endOfFile = true;
+							}
 						}
 					}
 				} catch (ISOException e) {
@@ -311,6 +173,14 @@ public class B2GenericPackager extends GenericPackager {
 			if (evt != null)
 				Logger.log(evt);
 		}
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "B2GenericPackager [fld=" + Arrays.toString(fld) + ", thirdBitmapField=" + thirdBitmapField + ", logger="
+				+ logger + ", realm=" + realm + ", headerLength=" + headerLength + "]";
 	}
 
 	/**

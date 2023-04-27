@@ -13,7 +13,7 @@
       class="org.jpos.iso.IFB_BITMAP"/>
   <isofield
       id="2"
-      length="16"
+      length="19"
       name="DE2 - PAN"
       class="org.jpos.iso.IFE_LLNUM"/>
   <isofield
@@ -192,17 +192,12 @@
       length="4"
       name="DE26 - Card acceptor business code"
       class="org.jpos.iso.IFE_NUMERIC"/>
-      
-      
    <isofield
       id="30"
       length="24"
       name="DE30 - Original amounts"
       class="org.jpos.iso.IFE_NUMERIC"/>
-      
-      
-      
-  <isofieldpackager
+   <isofieldpackager
   	  id="30"
   	  length="24"
   	  name="DE30 - Original amounts"
@@ -376,10 +371,15 @@
 	  	length="21"
 	  	name="PDS0023 - Terminal Type"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
-	  	<isofield
+	  <isofield
+	  	id="25"
+	  	length="7"
+	  	name="PDS0025 - Message Reversal Indicator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
 	  	id="27"
 	  	length="3"
-	  	name="PDS0027 - XXXXX"
+	  	name="PDS0027 - Flex Code"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
 	  	id="43"
@@ -392,14 +392,19 @@
 	  	name="PDS0044 - Program Participation Indicator"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
+	  	id="52"
+	  	length="3"
+	  	name="PDS0052 - Electronic Commerce Security Level Indicator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
 	  	id="58"
 	  	length="2"
-	  	name="PDS0058 - XXXXXXX"
+	  	name="PDS0058 - Token Assurance Level"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
 	  	id="59"
 	  	length="11"
-	  	name="PDS0059 - XXXXXXX"
+	  	name="PDS0059 - Token Requestor ID"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
 	  	id="52"
@@ -452,6 +457,11 @@
 	  	name="PDS0170 - Card Acceptor Inquiry Information"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
+	  	id="176"
+	  	length="6"
+	  	name="PDS0176 - Mastercard Assigned ID"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
 	  	id="177"
 	  	length="2"
 	  	name="PDS0177 - Cross-border"
@@ -459,8 +469,23 @@
 	  <isofield
 	  	id="183"
 	  	length="39"
-	  	name="PDS0183 - Brazil Post-Dated Transaction Data "
+	  	name="PDS0183 - Brazil Post-Dated Transaction Data"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="184"
+	  	length="36"
+	  	name="PDS0184 - Directory Server Transaction ID"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="185"
+	  	length="32"
+	  	name="PDS0185 - Accountholder Authentication Value"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
+	  	id="186"
+	  	length="39"
+	  	name="PDS0186 - Program Protocol"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
 	  <isofield
 	  	id="188"
 	  	length="120"
@@ -472,10 +497,25 @@
 	  	name="PDS0189 - Point-of-Interaction (POI) Phone Data"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
+	  	id="190"
+	  	length="6"
+	  	name="PDS0190 - Partner ID Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
 	  	id="191"
 	  	length="1"
 	  	name="PDS0191 - Originating Message Format"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="192"
+	  	length="3"
+	  	name="PDS0192 - Payment Transaction Initiator"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="195"
+	  	length="27"
+	  	name="PDS0195 - (Installment Data"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>		
 	  <isofield
 	  	id="207"
 	  	length="3"
@@ -597,10 +637,100 @@
 	  	name="PDS0501 - Transaction Description"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
 	  <isofield
+	  	id="505"
+	  	length="29"
+	  	name="PDS0505 - Passenger Name"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="506"
+	  	length="15"
+	  	name="PDS0506 - Ticket Number"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="507"
+	  	length="4"
+	  	name="PDS0507 - Issuing Carrier"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>			
+	  <isofield
+	  	id="511"
+	  	length="25"
+	  	name="PDS0511 - Travel Agency Name"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
+	  	id="512"
+	  	length="12"
+	  	name="PDS0512 - Total Fare"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="520"
+	  	length="6"
+	  	name="PDS0520 - Travel Date"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="521"
+	  	length="2"
+	  	name="PDS0521 - Carrier Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>	
+	  <isofield
+	  	id="522"
+	  	length="2"
+	  	name="PDS0522 - Service Class Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="523"
+	  	length="5"
+	  	name="PDS0523 - City of Origin/Airport Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="524"
+	  	length="5"
+	  	name="PDS0524 - City of Destination/Airport Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="525"
+	  	length="1"
+	  	name="PDS0525 - Stop Over Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="529"
+	  	length="15"
+	  	name="PDS0529 - Fare Basis Code"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="530"
+	  	length="5"
+	  	name="PDS0530 - Flight Number"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="531"
+	  	length="5"
+	  	name="PDS0531 - Departure Time"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>						
+	  <isofield
 	  	id="663"
 	  	length="992"
 	  	name="PDS0663 - Free-Form Description"
 	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="670"
+	  	length="104"
+	  	name="PDS0670 - Payer/User Information"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="671"
+	  	length="6"
+	  	name="PDS0671 - Date of Funds Requested"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>		
+	  <isofield
+	  	id="674"
+	  	length="19"
+	  	name="PDS0674 - Additional Trace/Reference Number Used by Card Acceptor"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>
+	  <isofield
+	  	id="765"
+	  	length="169"
+	  	name="PDS0765 - MoneySend Receiver Data)"
+	  	class="br.com.b2.clearing.dataTypes.IFA_TTTTLLLNUM"/>		
 	  <isofield
 	  	id="1000"
 	  	length="992"
@@ -661,11 +791,16 @@
       length="240"
       name="DE54 - Additional amounts"
       class="org.jpos.iso.IFA_LLLNUM"/>
-  <isofield
+
+   <isofield
       id="55"
       length="255"
       name="DE55 - ICC system-related data"
       class="org.jpos.iso.IFE_LLLBINARY"/>
+      
+      
+   
+      
   <isofield
       id="62"
       length="999"
@@ -738,7 +873,7 @@
       id="111"
       length="12"
       name="DE111 - Currency conversion assessment amount"
-      class="org.jpos.iso.IFA_LLLNUM"/>
+      class="org.jpos.iso.IFE_LLLCHAR"/>
   <isofield
       id="123"
       length="999"
